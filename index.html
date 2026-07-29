@@ -66,9 +66,9 @@
                         "full": "0.75rem"
                     },
                     "spacing": {
-                        "margin-mobile": "20px",
-                        "gutter": "32px",
-                        "margin-desktop": "64px",
+                        "margin-mobile": "24px",
+                        "gutter": "40px",
+                        "margin-desktop": "108px",
                         "unit": "8px",
                         "grid-columns": "12"
                     },
@@ -121,8 +121,72 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            transition-delay: var(--reveal-delay, 0ms);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Nav link underline */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: currentColor;
+            transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn-glow {
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, background-color 0.35s ease, color 0.35s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 0 1px rgba(251,255,71,0.35), 0 14px 36px -10px rgba(251,255,71,0.4);
+        }
+        .btn-glow:active {
+            transform: scale(0.95);
+        }
+
+        /* Icons */
+        .icon-tilt {
+            transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .icon-tilt:hover {
+            transform: rotate(-10deg) scale(1.18);
+        }
+
+        /* Tag chips */
+        .tag-chip {
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .tag-chip:hover {
+            transform: translateY(-3px);
+            border-color: rgba(251,255,71,0.6);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .nav-link::after, .btn-glow, .icon-tilt, .tag-chip { transition: none; }
+        }
     </style>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&amp;display=swap" rel="stylesheet" class=""></head>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"></head>
 <body class="font-body-md text-body-md overflow-x-hidden">
 <!-- Grid Overlay -->
 <div class="fixed inset-0 grid-overlay pointer-events-none z-0"></div>
@@ -130,22 +194,17 @@
 <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-primary/10 flex justify-between items-center px-margin-desktop py-6 max-w-full">
 <div class="font-headline-lg text-primary uppercase tracking-tighter font-black">Ink Zone 2.0</div>
 <div class="hidden md:flex items-center gap-gutter">
-<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1" href="#">Artists</a>
-<a class="font-label-caps text-label-caps text-on-surface/60 hover:text-primary transition-colors hover:scale-105 transition-transform duration-200" href="#">Gallery</a>
-<a class="font-label-caps text-label-caps text-on-surface/60 hover:text-primary transition-colors hover:scale-105 transition-transform duration-200" href="#">Services</a>
-<a class="font-label-caps text-label-caps text-on-surface/60 hover:text-primary transition-colors hover:scale-105 transition-transform duration-200" href="#">Aftercare</a>
+<a class="nav-link active font-label-caps text-label-caps text-primary pb-1" href="#">Artists</a>
+<a class="nav-link font-label-caps text-label-caps text-on-surface/60 hover:text-primary transition-colors duration-200 pb-1" href="#">Gallery</a>
+<a class="nav-link font-label-caps text-label-caps text-on-surface/60 hover:text-primary transition-colors duration-200 pb-1" href="#">Services</a>
+<a class="nav-link font-label-caps text-label-caps text-on-surface/60 hover:text-primary transition-colors duration-200 pb-1" href="#">Aftercare</a>
 </div>
-<button class="bg-primary text-black px-8 py-3 rounded-none font-label-caps text-label-caps hover:scale-105 active:scale-95 transition-all uppercase font-black">Book Now</button>
+<button class="btn-glow bg-primary text-black px-8 py-3 rounded-none font-label-caps text-label-caps hover:scale-105 active:scale-95 uppercase font-black">Book Now</button>
 </nav>
 <main class="relative z-10">
 <!-- Hero Section -->
-<section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-surface-container-lowest">
+<section class="relative min-h-[88vh] w-full flex items-center justify-center overflow-hidden bg-surface-container-lowest py-24"><div class="absolute inset-0 pointer-events-none select-none z-0 opacity-[0.08] overflow-hidden flex items-center justify-center"><img alt="Watermark" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDC1XPIsU2mtd-Jay2HxNDFN4laDy3UxVP3R-3czBuR7sa-37BXMg_ubZ7q7C3rECwgWu5ra686QDa4q6YYIpkbIrGS1XgfkbPWotpIkLHQADpyKyncVBRNK8tMzCtuMdsjodwLexnT6t5RmLKzocEKImdZwq3H2RZOfuHzjnsi4Bd0wSolkoOzWkr5o03yIoroxo6xViZinOISRUgPv8Dprn1MptMsFGDi3678-fCsaXVAp3qsVphWTmTB9NVklcwUA"></div>
 <!-- Background Text Layer (Behind Subject) -->
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
-<h1 class="font-display-lg text-[220px] md:text-[320px] leading-none text-outline uppercase whitespace-nowrap opacity-10 font-black" style="font-family: UnifrakturMaguntia, cursive; letter-spacing: -0.05em;">
-                INK ZONE 2.0
-            </h1>
-</div>
 <!-- Central Subject Layer -->
 <div class="relative z-10 w-full max-w-4xl px-margin-desktop flex flex-col md:flex-row items-center gap-gutter">
 <div class="relative w-full md:w-1/2">
@@ -161,7 +220,7 @@
 </div>
 </div>
 <!-- Foreground Content Layer -->
-<div class="w-full md:w-1/2 text-left mt-12 md:mt-0">
+<div class="reveal is-visible w-full md:w-1/2 text-left mt-12 md:mt-0">
 <div class="flex items-center gap-4 mb-6">
 <div class="h-[1px] w-12 bg-primary"></div>
 <span class="font-label-caps text-label-caps text-primary uppercase tracking-[0.3em] font-black">High-End Craftsmanship</span>
@@ -173,7 +232,7 @@
                     We transform individual narratives into permanent visual legacies through surgical precision and dark aesthetics.
                 </p>
 <div class="flex flex-wrap gap-4">
-<button class="bg-primary text-black px-12 py-5 font-label-caps text-label-caps hover:scale-105 transition-transform uppercase tracking-widest font-black">Book a Session</button>
+<button class="btn-glow bg-primary text-black px-12 py-5 font-label-caps text-label-caps hover:scale-105 uppercase tracking-widest font-black">Book a Session</button>
 </div>
 </div>
 </div>
@@ -181,8 +240,8 @@
 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-40 pointer-events-none"></div>
 </section>
 <!-- Gallery Section (The Portfolio) -->
-<section class="py-32 px-margin-desktop">
-<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-gutter">
+<section class="py-20 px-margin-desktop">
+<div class="reveal flex flex-col md:flex-row justify-between items-end mb-16 gap-gutter">
 <div>
 <h2 class="font-headline-xl text-headline-xl uppercase font-black">The Portfolio</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mt-4">A curated selection of technical mastery. From dark illustrative work to surgical neo-realism.</p>
@@ -191,30 +250,30 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
 <!-- Bento Grid Layout -->
-<div class="md:col-span-7 h-[600px] overflow-hidden relative group cursor-crosshair">
+<div class="reveal md:col-span-7 h-[440px] overflow-hidden relative group cursor-crosshair" style="--reveal-delay:0ms">
 <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Close up of a detailed black and grey tattoo featuring a neo-traditional illustrative style of a skull and flora." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWhdsGqZFEiYTpf4t2KUTTC2lkzC8c89UwofN8rAZke9J6BQFz8_wkxxZtzxhxhjX_AZJlbeQ_Zs9BKPbN1ZVinISCCg2vuSEDRQa3ZdxGSKLSyP1KvnrboWLRTCnd68gpNZvlS2HH5CGMPZ8Nap-pDnjklpRyzj2d4rogQXWLStHlzY5OO7gICu6hbDL8YVT87UBIZqW4cxSij484mKAMwj_FFJRmCR00L3FrWa3xtxvvsMQDbm1Df_1OdoPPuHJehg" style="transform: scale(1) translate(0px, 0px);">
-<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 p-8 flex flex-col justify-end">
 <span class="font-label-sm text-label-sm text-primary uppercase font-bold">Neo-Realism</span>
 <h4 class="font-headline-lg text-headline-lg font-black">Technical Void</h4>
 </div>
 </div>
-<div class="md:col-span-5 h-[600px] overflow-hidden relative group cursor-crosshair">
-<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Macro photography of a tattoo artist's workstation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8OpHpdJRdSZ17JlnkJdgbA5FtJ-TziXUrWyHkhog6zWuHZVupoc2iiWYzNqHUxt61Sr3EminVmOP-cKBGXQjScyXPPv9vmkvpnnbfbogIMvPsJiSBNPwX5UjgqodfrQhDb5RkXTRE_12RYvuhPz5-66YyhksFvSGLPV9Yj_6nMJKEVrtLUhT-Sp3CeonoL6B39gJ-ATwLBG5HCvhw0ONWKUBi6tlTu58sac-oic8udRmYYsHUzBb5hZ24RWYqVrhjjw">
-<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<div class="reveal md:col-span-5 h-[440px] overflow-hidden relative group cursor-crosshair" style="--reveal-delay:80ms">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Macro photography of a tattoo artist's workstation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8OpHpdJRdSZ17JlnkJdgbA5FtJ-TziXUrWyHkhog6zWuHZVupoc2iiWYzNqHUxt61Sr3EminVmOP-cKBGXQjScyXPPv9vmkvpnnbfbogIMvPsJiSBNPwX5UjgqodfrQhDb5RkXTRE_12RYvuhPz5-66YyhksFvSGLPV9Yj_6nMJKEVrtLUhT-Sp3CeonoL6B39gJ-ATwLBG5HCvhw0ONWKUBi6tlTu58sac-oic8udRmYYsHUzBb5hZ24RWYqVrhjjw" style="transform: scale(1) translate(0px, 0px);">
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 p-8 flex flex-col justify-end">
 <span class="font-label-sm text-label-sm text-primary uppercase font-bold">Blackwork</span>
 <h4 class="font-headline-lg text-headline-lg font-black">Dark Matter</h4>
 </div>
 </div>
-<div class="md:col-span-5 h-[500px] overflow-hidden relative group cursor-crosshair">
-<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="A detailed wide shot of a client receiving a tattoo in a modern, brutalist studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1b8VvnBlucwa2FLLddzLhc_wg-gyS-8uLJx0745t7GnGGUXnb3vJLpbW2MPXaQssvtCfTg39phsE4BbPZ7eWsgVJUhjI-ahWWxqM8q-vpO0oIpGvb9gctzfIt8doj0-bR5oi62ScVUJmSJXv8L6jmUZ12SnqMm7Ewwjy_vh0RV7PiKBe14HNDvMkOglnOPSE1epYyG7YaJl2OidCw-NP_iGSvQLX3raaI7jy9ig1zpjSor3nNg_FM7L5dhreRjuUEcw">
-<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<div class="reveal md:col-span-5 h-[360px] overflow-hidden relative group cursor-crosshair" style="--reveal-delay:120ms">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="A detailed wide shot of a client receiving a tattoo in a modern, brutalist studio." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1b8VvnBlucwa2FLLddzLhc_wg-gyS-8uLJx0745t7GnGGUXnb3vJLpbW2MPXaQssvtCfTg39phsE4BbPZ7eWsgVJUhjI-ahWWxqM8q-vpO0oIpGvb9gctzfIt8doj0-bR5oi62ScVUJmSJXv8L6jmUZ12SnqMm7Ewwjy_vh0RV7PiKBe14HNDvMkOglnOPSE1epYyG7YaJl2OidCw-NP_iGSvQLX3raaI7jy9ig1zpjSor3nNg_FM7L5dhreRjuUEcw" style="transform: scale(1) translate(0px, 0px);">
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 p-8 flex flex-col justify-end">
 <span class="font-label-sm text-label-sm text-primary uppercase font-bold">Composition</span>
 <h4 class="font-headline-lg text-headline-lg font-black">Spatial Balance</h4>
 </div>
 </div>
-<div class="md:col-span-7 h-[500px] overflow-hidden relative group cursor-crosshair">
-<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="A showcase of an intricate sleeve tattoo in progress." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACOvAuuROnd1RfOhpeQbp-gLpfY3n5EE22PW9H05ebT7mVss8iwKK5xMU_yEHWseZ6cZPY_EuDKRVOTr6h38VqKNoyxefv_7TUWy7sCYBfvU9rEBmEA2NudqLZ19Lct9ce4UH4ZTQWtixC-mGDwnTUsY9RpzRqCDgfNaF4nDCLf7ESfXtCNSJl6aSXzM3JVy5zpciHKw2S3RfwERLLd599EiHv-wh3j9QFsJuWfDdTrzUxZ3zmhYOriVLBWv9ojW-LGg">
-<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<div class="reveal md:col-span-7 h-[360px] overflow-hidden relative group cursor-crosshair" style="--reveal-delay:160ms">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="A showcase of an intricate sleeve tattoo in progress." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACOvAuuROnd1RfOhpeQbp-gLpfY3n5EE22PW9H05ebT7mVss8iwKK5xMU_yEHWseZ6cZPY_EuDKRVOTr6h38VqKNoyxefv_7TUWy7sCYBfvU9rEBmEA2NudqLZ19Lct9ce4UH4ZTQWtixC-mGDwnTUsY9RpzRqCDgfNaF4nDCLf7ESfXtCNSJl6aSXzM3JVy5zpciHKw2S3RfwERLLd599EiHv-wh3j9QFsJuWfDdTrzUxZ3zmhYOriVLBWv9ojW-LGg" style="transform: scale(1) translate(0px, 0px);">
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 p-8 flex flex-col justify-end">
 <span class="font-label-sm text-label-sm text-primary uppercase font-bold">Full Sleeve</span>
 <h4 class="font-headline-lg text-headline-lg font-black">Narrative Flow</h4>
 </div>
@@ -222,86 +281,29 @@
 </div>
 </section>
 <!-- Artist Section -->
-<section class="py-32 px-margin-desktop bg-surface-container-lowest"><div class="relative group/carousel">
-    <!-- Navigation Controls -->
-    <div class="absolute top-1/2 -left-4 md:-left-8 z-20 -translate-y-1/2 opacity-0 group-hover/carousel:opacity-100 transition-opacity">
-        <button class="w-12 h-12 bg-primary text-black flex items-center justify-center hover:scale-110 transition-transform">
-            <span class="material-symbols-outlined">chevron_left</span>
-        </button>
-    </div>
-    <div class="absolute top-1/2 -right-4 md:-right-8 z-20 -translate-y-1/2 opacity-0 group-hover/carousel:opacity-100 transition-opacity">
-        <button class="w-12 h-12 bg-primary text-black flex items-center justify-center hover:scale-110 transition-transform">
-            <span class="material-symbols-outlined">chevron_right</span>
-        </button>
-    </div>
-
-    <!-- Carousel Track -->
-    <div class="overflow-x-hidden">
-        <div class="flex transition-transform duration-500 ease-out">
-            <!-- Artist Slide 1 (Yavor) -->
-            <div class="w-full flex-shrink-0">
-                <div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter">
-                    <div class="md:col-span-5 order-2 md:order-1">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="h-[1px] w-12 bg-primary"></div>
-                            <span class="font-label-caps text-label-caps text-primary uppercase font-bold">Lead Artist</span>
-                        </div>
-                        <h2 class="font-headline-xl text-headline-xl mb-8 font-black">Yavor Kisyov</h2>
-                        <p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
-                            Defined by surgical precision and a deep immersion in dark aesthetics, Yavor has established himself as a vanguard of technical neo-realism. His work transcends mere tattooing, acting as a profound exploration of human anatomy.
-                            <br><br>
-                            Every line is intentional; every shadow is a calculated study of depth.
-                        </p>
-                        <div class="flex flex-wrap gap-4 mb-12">
-                            <span class="px-4 py-2 border border-primary/20 text-label-sm font-label-sm uppercase bg-surface-container-high font-bold text-primary">Surgical Realism</span>
-                            <span class="px-4 py-2 border border-primary/20 text-label-sm font-label-sm uppercase bg-surface-container-high font-bold text-primary">Dark Illustrative</span>
-                        </div>
-                        <button class="border border-primary text-primary px-10 py-4 font-label-caps text-label-caps hover:bg-primary hover:text-black transition-all uppercase font-bold">View Artist Portfolio</button>
-                    </div>
-                    <div class="md:col-span-7 order-1 md:order-2">
-                        <div class="relative pl-12">
-                            <div class="absolute -top-12 -left-4 w-full h-full border-2 border-primary/30 -z-10 translate-x-8 translate-y-8"></div>
-                            <img class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCskyij_zufFMZ6kHMYYr9H7ZWrnNFKs19fnEMLBcvu3ChvAaMAceJoVvolLQbEcnIV_xDxkJK0Fogm67TDiTQ5uxUKh4MvFuK8W_YOt2SdV7zLUaDOy-ZAaO27R6F9mLFNx68rzfWd3dWQ8tNQDdLluy1Z1Yu2L6G8JrlRc4-zv0si6iRkyx-5jcx8O1jzgKFJ-LZTa7EGlz3dY2kkCGHaERMuQIU0OHHUorSY6iXsO1hDOGG7Z2VawEQ0euBYKO9zDw">
-                            <div class="absolute bottom-12 -left-8 glass p-8 max-w-xs">
-                                <span class="font-label-sm text-label-sm text-primary block mb-2 font-bold uppercase">Experience</span>
-                                <h4 class="font-headline-lg text-4xl font-black text-primary">12 YEARS</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pagination Dots -->
-    <div class="flex justify-center gap-4 mt-16">
-        <button class="w-3 h-3 rounded-full bg-primary"></button>
-        <button class="w-3 h-3 rounded-full bg-primary/20 hover:bg-primary/50 transition-colors"></button>
-        <button class="w-3 h-3 rounded-full bg-primary/20 hover:bg-primary/50 transition-colors"></button>
-    </div>
-</div></section>
+<section class="py-20 px-margin-desktop bg-surface-container-lowest"><div class="relative group/carousel"><div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter"><div class="reveal md:col-span-5 order-2 md:order-1"><div class="flex items-center gap-4 mb-8"><div class="h-[1px] w-12 bg-primary"></div><span class="font-label-caps text-label-caps text-primary uppercase font-bold">Lead Artist</span></div><h2 class="font-headline-xl text-headline-xl mb-8 font-black">Yavor Kisyov</h2><p class="font-body-lg text-body-lg text-on-surface-variant mb-12">Defined by surgical precision and a deep immersion in dark aesthetics, Yavor has established himself as a vanguard of technical neo-realism. His work transcends mere tattooing, acting as a profound exploration of human anatomy.<br><br>Every line is intentional; every shadow is a calculated study of depth.</p><div class="flex flex-wrap gap-4 mb-12"><span class="tag-chip px-4 py-2 border border-primary/20 text-label-sm font-label-sm uppercase bg-surface-container-high font-bold text-primary cursor-default">Surgical Realism</span><span class="tag-chip px-4 py-2 border border-primary/20 text-label-sm font-label-sm uppercase bg-surface-container-high font-bold text-primary cursor-default">Dark Illustrative</span></div><button class="btn-glow border border-primary text-primary px-10 py-4 font-label-caps text-label-caps hover:bg-primary hover:text-black transition-all uppercase font-bold">View Artist Portfolio</button></div><div class="reveal md:col-span-7 order-1 md:order-2" style="--reveal-delay:100ms"><div class="relative pl-12 mb-8"><div class="absolute -top-12 -left-4 w-full h-full border-2 border-primary/30 -z-10 translate-x-8 translate-y-8"></div><img class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCskyij_zufFMZ6kHMYYr9H7ZWrnNFKs19fnEMLBcvu3ChvAaMAceJoVvolLQbEcnIV_xDxkJK0Fogm67TDiTQ5uxUKh4MvFuK8W_YOt2SdV7zLUaDOy-ZAaO27R6F9mLFNx68rzfWd3dWQ8tNQDdLluy1Z1Yu2L6G8JrlRc4-zv0si6iRkyx-5jcx8O1jzgKFJ-LZTa7EGlz3dY2kkCGHaERMuQIU0OHHUorSY6iXsO1hDOGG7Z2VawEQ0euBYKO9zDw"><div class="absolute bottom-12 -left-8 glass p-8 max-w-xs"><span class="font-label-sm text-label-sm text-primary block mb-2 font-bold uppercase">Experience</span><h4 class="font-headline-lg text-4xl font-black text-primary">12 YEARS</h4></div></div><div class="grid grid-cols-4 gap-4 pl-12"><div class="aspect-square overflow-hidden border border-primary/20 cursor-pointer hover:border-primary transition-colors duration-300"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaalT_yNnUEmypqI0-o4ee7vz-_Iq2Iak6apBIYwoHWl-BN0ROZYjmt0hCuZWKdGP9mEDhy0W-qKKG5i6Kkq8qsv9qp2W66PyxlFKsJ3Vt4bURagiW868JPtDvYcrwS9K8__16zFpMnSj9FgaA2B6GOH_PX0qDMqzR6-BKvvgPuKWOG6XfF0M_lzIiMr22LwAjweIqADAvTkcbZ2JEPBFdcVWLqVBxKVKDI_JLRSGz88VSwQwJcyE1gjDYdtOPTWPuYg" class="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"></div><div class="aspect-square overflow-hidden border border-primary/20 cursor-pointer hover:border-primary transition-colors duration-300"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJDGIqxCaEbCXP7ek_CMr9pakKF-iLnHeU2xEDm2WsYsDXYA9BivM4UOqSziVOiRa_H8C4IrK7TY0W3UwahIjcPnUtUBG-2o-Ggwv6gj3FmivGFHvcQbt0G3ZNGRRY7ShPNy4WN0hBKoVkOqYKo-WTiu_x2MumL6IUiR7U3uzM9dvZ1Nn0tHBnVcyWi9hq0ahK86BShFSeM6fh3axLXt3EyjcJjckja0SB2XzGL4OiONc5HNv4QushDkmBq0VYGHHL_g" class="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"></div><div class="aspect-square overflow-hidden border border-primary/20 cursor-pointer hover:border-primary transition-colors duration-300"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTihcqWecXgkxzCv6f8sAvlGZlqcCDh5dROMR25BGtnwFiab8G5SbeEkE0QTHKmetDKMIx6JL2ufscTnV7YaDUIRyurNVmZPuf1PGwgOhvlhSBqtpbAIfWAMW0VEXY28DT8aUdPvSh8mu427Lr8IaX0NPiZcg29RZXpqxaocTWl5F1rOC3i_bUPjB8r3qsY1N3xHs16j8e4azxQHECBNaYFAJMsfZhxgxrmHOLsxcymerMBRSggecWU3DoucwhxOW-vw" class="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"></div><div class="aspect-square overflow-hidden border border-primary/20 cursor-pointer hover:border-primary transition-colors duration-300"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvGZ-N6DZqcxtQsKANYGHw95E6FBpmT3tdwtfg9XPXT6nV6Tr8_SLSkivqGXMRgRb0hwzqDBGcVYAvC6P_-NnuTOS5GQzAx6nQ2VoQkdDWSlznz4VmDzcmMC7WSnttiC35Hdjn2B4BGabTPnyG1_Mk-8Z8sBJsCZrVgm9iSnkk0tw1JuFdqLTdvW--TeRPHKYQO8-PygzTrwnhYeWjhswH8CGFWWHd7_a8X21DaV4xu4wfel0DUjInXRrfhtEAh9xMLw" class="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"></div></div></div></div></div></section>
 <!-- Booking Section -->
-<section class="py-48 px-margin-desktop relative overflow-hidden">
+<section class="py-28 px-margin-desktop relative overflow-hidden">
 <!-- Animated Atmosphere (CSS Only) -->
 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-<div class="relative z-10 text-center max-w-4xl mx-auto mb-20">
+<div class="reveal relative z-10 text-center max-w-4xl mx-auto mb-16">
 <h2 class="font-headline-xl text-headline-xl uppercase mb-6 font-black">Initialize Your Legacy</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant">Choose your path toward a permanent transformation. Our sessions are high-focus and by appointment only.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter relative z-10">
 <!-- Card 1 -->
-<div class="glass p-16 flex flex-col items-center text-center group hover:bg-primary/10 transition-all duration-500">
-<span class="material-symbols-outlined text-6xl text-primary mb-8" data-icon="edit_square">edit_square</span>
+<div class="reveal glass p-16 flex flex-col items-center text-center group hover:bg-primary/10 hover:-translate-y-2 transition-all duration-500" style="--reveal-delay:0ms">
+<span class="material-symbols-outlined icon-tilt text-6xl text-primary mb-8" data-icon="edit_square">edit_square</span>
 <h3 class="font-headline-lg text-headline-lg mb-4 font-black">Custom Concept</h3>
 <p class="font-body-md text-on-surface-variant mb-12 max-w-sm">Bring your unique narrative to life. Collaborate with Yavor to design a one-of-a-kind anatomical piece.</p>
-<button class="bg-primary text-black px-12 py-4 font-label-caps text-label-caps group-hover:scale-110 transition-transform uppercase font-black">Inquiry Form</button>
+<button class="btn-glow bg-primary text-black px-12 py-4 font-label-caps text-label-caps group-hover:scale-110 uppercase font-black">Inquiry Form</button>
 </div>
 <!-- Card 2 -->
-<div class="glass p-16 flex flex-col items-center text-center group hover:bg-primary/10 transition-all duration-500">
-<span class="material-symbols-outlined text-6xl text-primary mb-8" data-icon="bolt">bolt</span>
+<div class="reveal glass p-16 flex flex-col items-center text-center group hover:bg-primary/10 hover:-translate-y-2 transition-all duration-500" style="--reveal-delay:120ms">
+<span class="material-symbols-outlined icon-tilt text-6xl text-primary mb-8" data-icon="bolt">bolt</span>
 <h3 class="font-headline-lg text-headline-lg mb-4 font-black">Flash Session</h3>
 <p class="font-body-md text-on-surface-variant mb-12 max-w-sm">Ready-to-wear art from our exclusive vault. Premium pre-drawn designs available for immediate booking.</p>
-<button class="border border-primary text-primary px-12 py-4 font-label-caps text-label-caps group-hover:bg-primary group-hover:text-black transition-all uppercase font-black">View Flash</button>
+<button class="btn-glow border border-primary text-primary px-12 py-4 font-label-caps text-label-caps group-hover:bg-primary group-hover:text-black transition-all uppercase font-black">View Flash</button>
 </div>
 </div>
 </section>
@@ -313,9 +315,9 @@
 <div class="font-headline-xl text-primary mb-6 font-black">Ink Zone 2.0</div>
 <p class="font-body-md text-on-surface/60 max-w-xs mb-8">© 2024 Ink Zone 2.0. High-End Craftsmanship. Beyond the skin.</p>
 <div class="flex gap-6">
-<span class="material-symbols-outlined cursor-pointer text-primary hover:scale-125 transition-transform" data-icon="share">share</span>
-<span class="material-symbols-outlined cursor-pointer text-primary hover:scale-125 transition-transform" data-icon="location_on">location_on</span>
-<span class="material-symbols-outlined cursor-pointer text-primary hover:scale-125 transition-transform" data-icon="mail">mail</span>
+<span class="material-symbols-outlined icon-tilt cursor-pointer text-primary" data-icon="share">share</span>
+<span class="material-symbols-outlined icon-tilt cursor-pointer text-primary" data-icon="location_on">location_on</span>
+<span class="material-symbols-outlined icon-tilt cursor-pointer text-primary" data-icon="mail">mail</span>
 </div>
 </div>
 <div class="md:col-span-2">
@@ -364,6 +366,18 @@
             }
         });
     });
+
+    // Scroll-triggered reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
 
